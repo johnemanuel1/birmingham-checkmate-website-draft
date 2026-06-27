@@ -38,7 +38,7 @@ if (bookingForm) {
       successPanel.focus();
     } catch (error) {
       formStatus.classList.add("error");
-      formStatus.textContent = "We could not send the enquiry just now. Please try again or use the direct email address below.";
+      formStatus.textContent = "The form service could not send this enquiry. If this is the first test, please approve the FormSubmit activation email in the club Outlook inbox, then try again.";
       submitButton.disabled = false;
       submitButton.textContent = "Send Booking Enquiry";
     }
