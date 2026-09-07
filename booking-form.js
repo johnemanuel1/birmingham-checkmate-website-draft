@@ -28,7 +28,7 @@ if (bookingForm) {
 
       const result = await response.json();
 
-      if (!response.ok || result.success === "false" || result.success === false) {
+      if (!response.ok || (result.success !== "true" && result.success !== true)) {
         throw new Error("The hosted form service did not accept the enquiry.");
       }
 
@@ -36,6 +36,8 @@ if (bookingForm) {
       bookingForm.hidden = true;
       successPanel.hidden = false;
       successPanel.focus();
+      // Analytics must never prevent the booking confirmation from appearing.
+      try { window.trackBookingEnquiry?.(); } catch (_) { /* Optional measurement. */ }
     } catch (error) {
       formStatus.classList.add("error");
       formStatus.textContent = "The form service could not send this enquiry. If this is the first test, please approve the FormSubmit activation email in the club Outlook inbox, then try again.";
